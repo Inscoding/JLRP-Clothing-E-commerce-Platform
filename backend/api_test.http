@@ -1,0 +1,42 @@
+### 💡 Check if server is running
+GET http://127.0.0.1:8000/
+Accept: application/json
+
+
+### 📘 Get API docs (FastAPI Swagger UI)
+GET http://127.0.0.1:8000/docs
+Accept: text/html
+
+
+### 🧑‍💻 Register a new user  ✅ (your current working route)
+POST http://127.0.0.1:8000/auth/register
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "Password123"
+}
+
+
+### (Optional) 🧾 Try signup alias  ⚙️ (works if you later add @router.post("/signup"))
+POST http://127.0.0.1:8000/auth/signup
+Content-Type: application/json
+
+{
+  "email": "testsignup@example.com",
+  "password": "Password123"
+}
+
+
+### 🔐 Log in to get JWT token
+POST http://127.0.0.1:8000/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+username=test@example.com&password=Password123
+
+
+### 👤 Access protected route (/users/me)
+### Replace <TOKEN> below with the actual token from login response
+GET http://127.0.0.1:8000/users/me
+Authorization: Bearer <TOKEN>
+Accept: application/json

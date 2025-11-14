@@ -1,26 +1,211 @@
-@import "tailwindcss";
+/* src/app/globals.css */
 
+/* Tailwind v4-compatible: preflight import + utilities */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@300;400;500;600&display=swap');
+
+/* Base layer: plain CSS (avoid using @apply to remove toolchain issues) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #ffffff;
+  --text: #000000;
+  --muted: #6b7280; /* gray-600 */
+  --burnt-orange: #ff4500;
+  --soft-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  --hover-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* global body */
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-inter), system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial;
+  margin: 0;
+  padding: 0;
+}
+
+/* font utility classes (these rely on the CSS variables set by next/font in layout.tsx) */
+.font-montserrat {
+  font-family: var(--font-montserrat) !important;
+}
+.font-sans {
+  font-family: var(--font-inter) !important;
+}
+
+/* Headings & typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+p {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* images default */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* selection color */
+::selection {
+  background: var(--burnt-orange);
+  color: #fff;
+}
+
+/* simple scrollbar styling for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* --- Component-style classes (plain CSS equivalents) --- */
+
+/* container utility (similar to max-w-7xl + padding) */
+.container {
+  max-width: 1120px; /* ~7xl */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* spacing helper */
+.section-padding {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* card */
+.card {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: var(--soft-shadow);
+  transition: box-shadow 0.18s ease, transform 0.18s ease;
+}
+.card:hover {
+  box-shadow: var(--hover-shadow);
+  transform: translateY(-6px);
+}
+
+/* buttons */
+.btn {
+  display: inline-block;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.18s ease;
+}
+
+.btn-primary {
+  background-color: var(--text); /* black */
+  color: white;
+}
+.btn-primary:hover {
+  background-color: #111;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--text);
+  color: var(--text);
+}
+.btn-outline:hover {
+  background: var(--text);
+  color: white;
+}
+
+.btn-accent {
+  background-color: var(--burnt-orange);
+  color: white;
+}
+.btn-accent:hover {
+  background-color: #ff6a2a;
+}
+
+/* small utilities used on product cards */
+.product-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  background: #f3f4f6; /* tailwind gray-100 fallback */
+  border-radius: 0.5rem;
+}
+.product-image-wrapper img,
+.product-image-wrapper > span {
+  /* for next/image placeholder span */
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* aspect 3/4 fallback: using padding-top trick for wrappers if needed */
+.aspect-3-4 {
+  position: relative;
+  width: 100%;
+  padding-top: calc(4 / 3 * 100% / 1); /* not exact, but kept for fallback */
+}
+@media (min-width: 1024px) {
+  /* nothing special here — the next/image fill + container will handle sizing */
+}
+
+/* section title util */
+.section-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+/* tiny accessibility helpers */
+.sr-only {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
 }
