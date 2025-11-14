@@ -14,7 +14,7 @@ import os
 from bson import ObjectId
 
 # import dependency helpers from dedicated module to avoid circular imports
-from app.dependencies import get_db, get_current_user, get_admin_user
+from app.dependencies_common import get_db, get_current_user, get_admin_user
 
 router = APIRouter(prefix="/returns", tags=["returns"])
 
