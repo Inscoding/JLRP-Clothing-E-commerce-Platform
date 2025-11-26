@@ -1,64 +1,57 @@
-👔 JLRP Clothing – E-commerce Platform
+# 👔 **JLRP Clothing E-commerce Platform**
 
-A complete fashion e-commerce system with Razorpay payments, admin dashboard controls, and public order tracking using real delivery partner integrations.
+A modern fashion e-commerce backend + frontend system built for scale, testing, and future real-world delivery integration.
 
-🚀 Ready to Run From Scratch
+> No business inventory needed to test.  
+> No customer login required.  
+> Admin controls all orders & product management.
 
-Add or modify products in admin panel
+---
 
-Place customer orders and pay via Razorpay
+## ✨ **Highlights**
 
-Store orders securely in MongoDB
+- 🛍️ Product listing, details, cart, checkout
+- 💳 Razorpay payment integration
+- 🔐 Admin dashboard with JWT authentication
+- 📦 Order storage in MongoDB
+- 🚚 Tracking page + courier fields support
+- 📩 Automatic email notifications:
+  - `SHIPPED`
+  - `DELIVERED`
+  - `CANCELLED`
 
-Update order status (PENDING / SHIPPED / DELIVERED / CANCELLED)
+---
 
-Send automatic emails for shipping, delivery, and cancellation
+## 🧠 **System Flow Overview**
 
-Public Track Order page (no login required)
 
-Integrations supported: Shiprocket & Delhivery
+1️⃣ Backend Setup
+cd backend
+python -m venv venv
+source venv/Scripts/activate  # Windows
+pip install -r requirements.txt
+uvicorn app.main:app --reload
 
-Can be started and tested without any existing business inventory
+2️⃣ Frontend Setup
+cd frontend
+npm install
+npm run dev
 
-✨ Tech Stack
-Component	Technology
-Frontend	Next.js 15, TypeScript, Tailwind CSS
-Backend	FastAPI, MongoDB, JWT, BackgroundTasks, Emails
-Payments	Razorpay Order API + Webhooks
-Tracking	Public page using orderId and tracking URL
-🧠 How the System Works
+🔗 Key Working Routes
+Customer View (Public)
 
-Admin uploads clothes & product details
+🏠 Home: /
+🛒 Cart: /cart
+🚦Track Order:
+/track?orderId=<ORDER_ID>
+(Clicking email button opens this page to show live status)
 
-Customer visits shop → sees products (no signup needed)
+Admin Panel (Secure)
 
-Customer places order & pays using Razorpay
+🔑 Login: /admin/login
+📊 Dashboard: /admin/dashboard
+👕 Products: /admin/products
+📦 Orders: /admin/orders
+🚚 Tracking Manage: /admin/tracking
 
-Backend stores order in DB
-
-Admin updates order status
-
-SHIPPED → Email + tracking link
-
-DELIVERED → Delivery email
-
-CANCELLED → Cancellation email
-
-Customer clicks Track Order and gets redirected to the courier website
-
-Simple, solid, traditional flow — modern power, old-school reliability.
-
-📁 Project Structure
-JLRP Clothing E-commerce Platform
-│
-├── backend/
-│   └── app/routers/   → auth, payments, products, orders, dashboard, tracking
-│
-└── frontend/
-    └── src/app/       → shop, admin pages, cart, checkout, track order
-
-⚠️ Note About Friend’s Deal
-
-This project was built for transparent e-commerce, not shady profit splits. The platform supports trusted business flows where price handling is correct and reliable for buyers and admins.
-
-💖 Made with Inscoding
+Made with Inscoding❤️
