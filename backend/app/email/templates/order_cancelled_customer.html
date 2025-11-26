@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block content %}
+<p>Hi {{ customer_name }},</p>
+
+<p>
+  Your order <strong>#{{ order_id }}</strong> has been
+  <span class="badge">Cancelled</span>.
+</p>
+
+<div class="order-box">
+  <div class="order-row">
+    <span class="order-label">Order ID</span>
+    <span>#{{ order_id }}</span>
+  </div>
+  <div class="order-row">
+    <span class="order-label">Placed on</span>
+    <span>{{ order_date }}</span>
+  </div>
+  <div class="order-row">
+    <span class="order-label">Total</span>
+    <span>{{ currency }} {{ total_amount }}</span>
+  </div>
+</div>
+
+<p style="margin-top: 18px">
+  If you did not request this cancellation or have any questions, please contact
+  our support team.
+</p>
+
+<p>Regards,<br />{{ brand_name or "Team" }}</p>
+{% endblock %}

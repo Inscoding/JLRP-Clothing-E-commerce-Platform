@@ -1,0 +1,17 @@
+<<<<<<< HEAD
+venv/
+__pycache__/
+.env
+uploads/
+*.log
+.venv/
+=======
+node_modules/
+.next/
+.env
+.env.local
+.env.local
+.env.production
+*.log
+.DS_Store
+>>>>>>> dc52f2a (chore: frontend ready for GitHub push)

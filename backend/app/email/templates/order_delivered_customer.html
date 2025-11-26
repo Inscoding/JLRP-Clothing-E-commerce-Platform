@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block content %}
+<p>Hi {{ customer_name }},</p>
+
+<p>
+  Great news! Your order <strong>#{{ order_id }}</strong> has been
+  <span class="badge">Delivered</span>.
+</p>
+
+<div class="order-box">
+  <div class="order-row">
+    <span class="order-label">Order ID</span>
+    <span>#{{ order_id }}</span>
+  </div>
+  <div class="order-row">
+    <span class="order-label">Delivered on</span>
+    <span>{{ delivered_date }}</span>
+  </div>
+  <div class="order-row">
+    <span class="order-label">Total</span>
+    <span>{{ currency }} {{ total_amount }}</span>
+  </div>
+</div>
+
+{% if tracking_url %}
+<p>You can still view your tracking details here:</p>
+<a href="{{ tracking_url }}" class="btn-primary" target="_blank" rel="noopener">
+  View tracking
+</a>
+{% endif %}
+
+<p style="margin-top: 18px">
+  We hope you enjoy your purchase! If there is any issue with your order, please
+  contact our support team.
+</p>
+
+<p>Regards,<br />{{ brand_name or "Team" }}</p>
+{% endblock %}

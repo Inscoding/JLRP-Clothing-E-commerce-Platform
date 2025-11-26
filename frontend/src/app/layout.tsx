@@ -1,4 +1,7 @@
+// src/app/layout.tsx
 import type { Metadata } from 'next';
+import './globals.css'; // if you have it – keep your global styles here
+import { Providers } from './Providers'; // 👈 new
 
 export const metadata: Metadata = {
   title: 'JLRP Brand - Wear Confidence',
@@ -24,7 +27,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {/* 👇 whole app now wrapped with CartProvider */}
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
